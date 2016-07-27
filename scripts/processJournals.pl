@@ -21,6 +21,7 @@ my %fields =(
             Refereed=>1,
             OpenAccess=>1,
             Authors=>1,
+            URL=>1,
             dmgKey => 0,
 );
 

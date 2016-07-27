@@ -2,7 +2,7 @@
 
 use strict;
 use FindBin;                 # locate this script
-
+use Data::Dumper;
 use lib "$FindBin::Bin";
 use common;
 
@@ -80,7 +80,7 @@ sub Verify_Entry
     }
     foreach my $k (keys %fields) {
         if ($fields{$k} == 1) {
-            die "$record{recordId} :$record{Title}: => Field [$k] is required" unless defined($record{$k});
+            die "$record{recordId} :$record{Title}: => Field [$k] is required\n".Dumper(\%record) unless defined($record{$k});
         }
                 
     }
@@ -97,7 +97,7 @@ sub Verify_Entry
     # verify published status
     die "$record{Title}: We don't know this published status [$record{PublishingStatus}]" unless $record{PublishingStatus} =~ /^(Published|Accepted)$/;
     
-    die "$record{Title}: We don't know this country [$record{Country}]" unless defined($countries{$record{Country}});
+    #die "$record{Title}: We don't know this country [$record{Country}]" unless defined($countries{$record{Country}});
     $record{CountryOut} = '<linkedWith label="Country" value="' . $record{Country} . '" refOrLovId="00000000000000000000000000002000"/>';
 
     if ($record{Country} =~ /^(Canada|United States)$/) {
