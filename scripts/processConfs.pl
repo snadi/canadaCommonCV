@@ -179,7 +179,7 @@ $lov{$record{PublishingStatus}}
 </bilingual>
 </field>
 <field id="61690b466fb748d99ed29b340c0ee60b" label="URL">
-<value type="String">http://dx.doi.org/10.1007/978-3-319-17837-0_14</value>
+<value type="String">$record{URL}</value>
 </field>
 <field id="560a2ce08e14497ba575af760eb12ba9" label="Refereed?">
 $lov{$record{Refereed}}

@@ -108,7 +108,7 @@ $lov{$record{PublishingStatus}}
 <bilingual>
 <french>
 </french>
-<english>
+<english>$record{Note}
 </english>
 </bilingual>
 </field>
