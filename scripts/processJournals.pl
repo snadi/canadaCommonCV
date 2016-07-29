@@ -70,6 +70,7 @@ sub Verify_Entry
 sub Output_Entry
 {
     my %record = (@_);
+    %record = Escape_XML_hash( %record );
 #    foreach my $k (sort keys %record) {
 #       print "$k-> $record{$k}\n"
 #    }

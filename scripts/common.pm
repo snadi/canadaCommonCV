@@ -1,4 +1,5 @@
 #!/usr/bin/perl
+use XML::LibXML;
 
 ######################################################################
 
@@ -114,5 +115,20 @@ END
     close IN;
 }
 
+# Escape strings to XML
+sub Escape_XML {
+    my ($text) = @_;
+    my $node = XML::LibXML::Element->new( "tmp" );
+    $node->appendText($text);
+    return $node->firstChild->toString();
+}
 
+sub Escape_XML_hash {
+    my %hash = @_;
+    my %dont = ("CountryOut"=>1,"subregionOut"=>1,"Type"=>1,"PublishStatus"=>1,"Refereed"=>1);
+    foreach my $k (keys %hash) {
+        $hash{$k} = Escape_XML($hash{$k}) unless $dont{$k};   
+    }
+    return %hash;
+}
 1;
