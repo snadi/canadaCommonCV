@@ -1,26 +1,30 @@
 INCS=scripts/common.pm
 
-default: confs journals
+default: creatdir confs journals
+
+creatdir:
+	rm -rf output/*
+	mkdir -p output
 
 journals: journals.xml journals.bib
 
 confs: confs.xml confs.bib
 
-confs.xml: scripts/processConfs.pl $(INCS) confs.txt
-	perl $< confs.txt > tmp.tmp && mv tmp.tmp  $@
+confs.xml: scripts/processConfs.pl $(INCS) input/confs.txt
+	perl $< input/confs.txt > tmp.tmp && mv tmp.tmp  output/$@
 
-journals.xml: scripts/processJournals.pl $(INCS) journals.txt
-	perl $< journals.txt > tmp.tmp && mv tmp.tmp  $@
+journals.xml: scripts/processJournals.pl $(INCS) input/journals.txt
+	perl $< input/journals.txt > tmp.tmp && mv tmp.tmp  output/$@
 
-confs.bib: scripts/txtToLatexConfs.pl $(INCS)  confs.txt
-	perl $< confs.txt > tmp.tmp && mv tmp.tmp  $@
+confs.bib: scripts/txtToLatexConfs.pl $(INCS)  input/confs.txt
+	perl $< input/confs.txt > tmp.tmp && mv tmp.tmp  output/$@
 
-journals.bib:  scripts/txtToLatexJournals.pl $(INCS) journals.txt
-	perl $< journals.txt > tmp.tmp && mv tmp.tmp  $@
+journals.bib:  scripts/txtToLatexJournals.pl $(INCS) input/journals.txt
+	perl $< input/journals.txt > tmp.tmp && mv tmp.tmp  output/$@
 
 clean:
-	rm -f journals.bib confs.bib journals.xml confs.xml
+	rm -f output/journals.bib output/confs.bib output/journals.xml output/confs.xml
 
-bibs:	confs.bib journals.bib
+bibs:	output/confs.bib output/journals.bib
 
-xmls:   confs.xml journals.xml
+xmls:   output/confs.xml output/journals.xml
