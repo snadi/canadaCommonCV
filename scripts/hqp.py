@@ -1,25 +1,12 @@
 
 # fill with your own HQP names
-hqp = ["Amann, Sven", 
-            "Proksch, Sebastian", 
-            "Cergani, Ervina",
-            "Masri, Samer Al", 
-            "Mahmoudi, Mehran", 
-            "de la Mora, Fernando Lopez", 
-            "Radu, Aida", 
-            "Kareshk, Moein Owhadi", 
-            "Bhuiyan, Nazim Uddin", 
-            "Jha, Ajay Kumar", 
-            "El-Hajj, Rehab", 
-            "Kamath, Ram", 
-            "Tang, Henry", 
-            "Nuryyev, Batyr", 
-            "Galappaththi, Akalanka", 
-            "Nguyen, Nhan", 
-            "Gulami, Mansur", 
-            "Ellis, Max", 
-            "Islam, Mohayeminul"]
+hqp = ["Nguyen Quang Do, List",
+       "Spath, Johannes",
+       "Ochoa, Erick",
+       "Tiganov, Daniil",
+       "Cho, Jeff",
+       "Bangash, Abdul Ali",
+       "Newburry, Kristen",
+       "Xia, Cijie"]
 
-students = ["Lin, Changyuan",
-            "Soni, Abhishek",
-            "Soares, Larissa Rocha"]
+students = ["Chikin, Artem", "Nashaat, Mona", "Sahar, Hareem", "LLlyod, Taylor", "Gulami, Mansur"]
