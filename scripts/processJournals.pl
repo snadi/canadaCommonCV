@@ -23,6 +23,7 @@ my %fields =(
             Authors=>1,
             URL=>1,
             dmgKey => 0,
+            Note => 0
 );
 
 my %lov = Get_Lov();

@@ -139,9 +139,9 @@ def process(pubs):
                     opub['Country'] = " "
                 #print(opub['Country'])
                 opub['PublishedIn'] = " " # pub['venue'][0:99]
-                note = get_note(pub)
-                if note:
-                    opub['Note'] = get_note(pub)
+            note = get_note(pub)
+            if note:
+                opub['Note'] = get_note(pub)
             opub['PublishingStatus']=pub.get('publishingstatus',"Published")
             opub['Refereed'] = pub.get("refereed","Yes")
             opub['Authors'] = bold_authors(pub)
