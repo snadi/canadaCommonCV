@@ -13,11 +13,11 @@ journals: $(OUTPUT)journals.xml $(OUTPUT)journals.bib
 
 confs: $(OUTPUT)confs.xml $(OUTPUT)confs.bib
 
-$(OUTPUT)pubs.json: input/$(INPUT_BIB) bib_to_json.py
-	python bib_to_json.py --bibfile input/$(INPUT_BIB) > $@
+$(OUTPUT)pubs.json:
+	python scripts/bib_to_json.py --bibfile input/$(INPUT_BIB) > $@
 
-$(OUTPUT)confs.txt $(OUTPUT)journals.txt: $(OUTPUT)pubs.json json_to_dmg.py
-	python json_to_dmg.py --jsonfile $(OUTPUT)pubs.json
+$(OUTPUT)confs.txt $(OUTPUT)journals.txt: $(OUTPUT)pubs.json scripts/json_to_dmg.py
+	python scripts/json_to_dmg.py --jsonfile $(OUTPUT)pubs.json
 
 $(OUTPUT)confs.xml: scripts/processConfs.pl $(INCS) processedfiles
 	perl $< $(OUTPUT)confs.txt > tmp.tmp && mv tmp.tmp  $@
