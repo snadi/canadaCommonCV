@@ -71,6 +71,10 @@ sub Output_Entry
 {
     my %record = (@_);
     %record = Escape_XML_hash( %record );
+
+    if (defined($record{Note}) and $record{Note} ne "") {
+        $record{Conference} .= " ($record{Note})"; 
+    } 
 #    foreach my $k (sort keys %record) {
 #       print "$k-> $record{$k}\n"
 #    }
