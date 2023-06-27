@@ -2,7 +2,7 @@ INCS=scripts/common.pm
 INPUT=input/
 OUTPUT=output/
 
-default: $(OUTPUT) processedfiles confs journals
+default: $(OUTPUT) processedfiles confs journals rmtmpfiles
 
 $(OUTPUT):
 	mkdir -p $@
@@ -13,8 +13,8 @@ journals: $(OUTPUT)journals.xml $(OUTPUT)journals.bib
 
 confs: $(OUTPUT)confs.xml $(OUTPUT)confs.bib
 
-$(OUTPUT)pubs.json: input/pubs.bib bib_to_json.py
-	python bib_to_json.py --bibfile input/pubs.bib > $@
+$(OUTPUT)pubs.json: input/$(INPUT_BIB) bib_to_json.py
+	python bib_to_json.py --bibfile input/$(INPUT_BIB) > $@
 
 $(OUTPUT)confs.txt $(OUTPUT)journals.txt: $(OUTPUT)pubs.json json_to_dmg.py
 	python json_to_dmg.py --jsonfile $(OUTPUT)pubs.json
@@ -30,6 +30,9 @@ $(OUTPUT)confs.bib: scripts/txtToLatexConfs.pl $(INCS) processedfiles
 
 $(OUTPUT)journals.bib:  scripts/txtToLatexJournals.pl $(INCS) processedfiles
 	perl $< $(OUTPUT)journals.txt > tmp.tmp && mv tmp.tmp $@
+
+rmtmpfiles:
+	rm -f $(OUTPUT)*.txt $(OUTPUT)*.json
 
 clean:
 	rm -f output/*

@@ -1,6 +1,7 @@
 from pybtex.database import parse_file
 import argparse
 import json
+from hqp import hqp, students
 
 # fill with your own HQP names
 hqp = ["Amann, Sven", 
