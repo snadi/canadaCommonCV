@@ -17,11 +17,8 @@ def process_authors(authors, tex=False):
 
 def process_addendum(addendum):
     # input format is Acceptance Ratio: 12/30 = 40\%
-    # return "12/30 = 40%"
     # this could also be an impact factor "Impact: 4.2"
-    if len(addendum) == 0:
-        return ""
-    return addendum.split(":")[1].strip().replace("\%","%")
+    return addendum.strip().replace("\\%","%")
 
 
 def main():
@@ -51,6 +48,8 @@ def main():
         if 'pages' in paper.fields:
             jsonentry['pagerange'] = paper.fields['pages']
 
+        if 'addendum' in paper.fields:
+            jsonentry['notes'] = process_addendum(paper.fields['addendum'])
         
 
         jsonentry['PublishingStatus'] = 'Published' # assumption is entries appearing in bib file are published
@@ -65,8 +64,7 @@ def main():
             jsonentry['venue'] = paper.fields['booktitle']
             jsondata['conferences'].append(jsonentry)
 
-            if 'addendum' in paper.fields:
-                jsonentry['rate'] = process_addendum(paper.fields['addendum'])
+            
 
     with open(args.outputfile, 'w') as outfile:
         json.dump(jsondata, outfile, indent=4)

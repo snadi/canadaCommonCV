@@ -110,10 +110,10 @@ def bold_authors(entry):
 def get_note(pub):
     note = []
     if 'notes' in pub:
-        note.append(pub['notes'])
+        return pub['notes']
     if 'rate' in pub:
-        note.append("Acceptance rate: %s" % pub['rate'])
-    return ". ".join(note)
+        return pub['rate']
+    return None
 
 def process(pubs):
     seen_ids = set()
@@ -139,7 +139,9 @@ def process(pubs):
                     opub['Country'] = " "
                 #print(opub['Country'])
                 opub['PublishedIn'] = " " # pub['venue'][0:99]
-                opub['Note'] = get_note(pub)+" "
+                note = get_note(pub)
+                if note:
+                    opub['Note'] = get_note(pub)
             opub['PublishingStatus']=pub.get('publishingstatus',"Published")
             opub['Refereed'] = pub.get("refereed","Yes")
             opub['Authors'] = bold_authors(pub)
