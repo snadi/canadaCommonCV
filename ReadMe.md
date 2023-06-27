@@ -50,7 +50,8 @@ instead, concentrate on just uploading XML files.
   - python -m venv .venv
   - source .venv/bin/activate
   - pip install -r requirements 
-- Create your input bib file in the `input` directory (`<bibfilename>`)
+- Create your input bib file in the `input` directory (`<bibfilename>`). 
+- If you want to automatically highlight hqp names, then update your HQP names in `hqp.py`
 - Run `make INPUT_BIB=<bibfilename>` 
 - The above command will generate the following files in the `output` directory:
     -   journals.xml and confs.xml
