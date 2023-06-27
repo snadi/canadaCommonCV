@@ -154,8 +154,8 @@ def process(pubs):
                 raise Exception("We need a region (province/state) ! %s \n%s" % (opub['dmgKey'],pub))                        
             if opub['dmgKey'] in seen_ids:
                 raise Exception("We've seen %s before!\n%s" % (opub['dmgKey'],pub))
-            else:
-                print(opub['dmgKey'])
+            # else:
+            #     print(opub['dmgKey'])
             seen_ids.add(opub['dmgKey'])
             opub['recordId'] = record_id(opub['dmgKey'])
             if pub_type == 'journals' and not 'journal' in pub:
