@@ -2,8 +2,7 @@ import json
 import hashlib
 import re
 import argparse
-#reload(sys)
-#sys.setdefaultencoding('utf8')
+from bib_to_json import remove_umlauts
 
 fields_to_remove = ["authors_tex"]
 fields_to_rename = []
@@ -99,8 +98,7 @@ def bold_authors(entry):
         return entry["Authors"]
     if "authors_tex" in entry:
         authors = entry["authors_tex"]
-        authors = re.sub(r'\\\'{a}',r'a',authors)
-        authors = re.sub(r'\\\'{e}',r'e',authors)
+        authors = remove_umlauts(authors)
         authors = re.sub(r'\\student{([^}]+)}',r'<b>\1</b>',authors)
         authors = re.sub(r'\\HQP{([^}]+)}',r'<b>\1*</b>',authors)
         return authors
