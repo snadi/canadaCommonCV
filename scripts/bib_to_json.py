@@ -4,18 +4,17 @@ import json
 import re
 from hqp import hqp, students
 
-def remove_umlauts(authors):
-    authors = re.sub(r'\\\'{a}',r'ae',authors)
-    authors = re.sub(r'\\\'{e}',r'e',authors)
-    authors = re.sub(r'\\\"{a}',r'ae',authors)
-    authors = re.sub(r'\\\"{o}',r'oe',authors)
-    authors = re.sub(r'\\\"{u}',r'ue',authors)
-    return authors
+def remove_umlauts(author):
+    author = re.sub(r'\\\'{a}',r'ae',author)
+    author = re.sub(r'\\"{a}',r'ae',author)
+    author = re.sub(r'\\"{o}',r'oe',author)
+    author = re.sub(r'\\"{u}',r'ue',author)
+    return author
 
 def process_authors(authors, tex=False):
     author_list = []
     for author in authors:
-        author = remove_umlauts(str(author))
+        author = str(author)
         if tex and author in hqp:
             author_list.append("\\HQP{%s}" % author)
         elif tex and author in students:

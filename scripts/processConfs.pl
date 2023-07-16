@@ -148,7 +148,7 @@ sub Output_Entry
 #    foreach my $k (sort keys %record) {
 #       print "$k-> $record{$k}\n"
 #    }
-print STDERR "title $record{Title}\n";
+
 print <<END;
 <section id="4b9f909503cd4c8aa8d826c87d6d874d" label="Conference Publications" recordId="$record{recordId}">
 <field id="81ef87c09ded47ae8880b8d79e83406f" label="Conference Publication Type">

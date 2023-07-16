@@ -101,7 +101,8 @@ def bold_authors(entry):
         return entry["Authors"]
     if "authors_tex" in entry:
         authors = entry["authors_tex"]
-        authors = remove_umlauts(authors)
+        authors = re.sub(r'\\\'{a}',r'a',authors)
+        authors = re.sub(r'\\\'{e}',r'e',authors)
         authors = re.sub(r'\\student{([^}]+)}',r'<b>\1</b>',authors)
         authors = re.sub(r'\\HQP{([^}]+)}',r'<b>\1*</b>',authors)
         return authors
