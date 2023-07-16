@@ -26,7 +26,12 @@ def process_authors(authors, tex=False):
 def process_addendum(addendum):
     # input format is Acceptance Ratio: 12/30 = 40\%
     # this could also be an impact factor "Impact: 4.2"
-    return addendum.strip().replace("\\%","%")
+    addendum = addendum.strip().replace("\\%","%")
+    if addendum.endswith(")"):
+        addendum = addendum[:-1]
+    if addendum.startswith("("):
+        addendum = addendum[1:]
+    return addendum
 
 
 def main():
