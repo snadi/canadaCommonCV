@@ -65,11 +65,11 @@ def main():
             jsonentry['notes'] = process_addendum(paper.fields['addendum'])
         
         if 'status' in paper.fields:
-            jsonentry['PublishingStatus'] = paper.fields['status']
+            jsonentry['publishingstatus'] = paper.fields['status']
         else:
             # assumption is entries appearing in bib file are published, 
             # unless another explicit status is given
-            jsonentry['PublishingStatus'] = 'Published' 
+            jsonentry['publishingstatus'] = 'Published' 
 
         if paper.type == 'article': # journal specific values
             jsonentry['venue'] = paper.fields['journal']
@@ -80,6 +80,7 @@ def main():
         elif paper.type == 'inproceedings': # conference specific values
             jsonentry['venue'] = paper.fields['booktitle']
             jsondata['conferences'].append(jsonentry)
+            jsonentry['dateconf'] = paper.fields['dateconf']
 
             
 

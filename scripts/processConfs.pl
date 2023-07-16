@@ -140,10 +140,11 @@ sub Output_Entry
     my %record = (@_);
     %record = Escape_XML_hash( %record );
 
-    # check if Note is defined and is not empty, then append it to end of conference
-    if (defined($record{Note}) and $record{Note} ne "" and $record{Note} !~ "unavailable") {
-        $record{Conference} .= " ($record{Note})";
-    }
+    # Uncomment this if you want to append acceptance rate to conference title
+    # # check if Note is defined and is not empty, then append it to end of conference
+    # if (defined($record{Note}) and $record{Note} ne "" and $record{Note} !~ "unavailable") {
+    #     $record{Conference} .= " ($record{Note})";
+    # }
 
 #    foreach my $k (sort keys %record) {
 #       print "$k-> $record{$k}\n"

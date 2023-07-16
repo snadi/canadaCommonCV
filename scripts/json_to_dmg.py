@@ -68,10 +68,13 @@ def conference_date(entry):
     raise Exception("No Conf date in entry")
 
 def entry_date(entry):
+    # Note sure why but there are two dates
+    # one that is Date = month/year
+    # and one that is Conference Date = year-month-year
     check = ["date","DateConf","dateconf","published","year"]
     for key in check:
         if key in entry:
-            if key == "date":
+            if key == "date" or key == "dateconf":
                 if "-" in entry[key]:
                     parts = entry[key].split("-")
                     return "%s/%s" % (parts[0], parts[1])                    
@@ -105,6 +108,7 @@ def bold_authors(entry):
         authors = re.sub(r'\\\'{e}',r'e',authors)
         authors = re.sub(r'\\"{u}', r'ue', authors)
         authors = re.sub(r'\\"{o}', r'oe', authors)
+        authors = re.sub(r'\\"{a}',r'ae',authors)
         authors = re.sub(r'\\student{([^}]+)}',r'<b>\1</b>',authors)
         authors = re.sub(r'\\HQP{([^}]+)}',r'<b>\1*</b>',authors)
         return authors

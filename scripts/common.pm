@@ -5,6 +5,7 @@ use XML::LibXML;
 
 my %lov = (
            "Published" => "<lov id=\"00000000000000000000000100001704\">Published</lov>",
+           "Revision Requested" => "<lov id=\"00000000000000000000000100001701\">Revision Requested</lov>",
            "Accepted" =>  "<lov id=\"00000000000000000000000100001702\">Accepted</lov>",
            "Yes"  => "<lov id=\"00000000000000000000000000000400\">Yes</lov>",
            "No"  => "<lov id=\"00000000000000000000000000000401\">No</lov>",

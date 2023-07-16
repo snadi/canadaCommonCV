@@ -58,7 +58,7 @@ sub Verify_Entry
     die "$record{Title}: illegal format in date [$record{Date}]" unless $record{Date} =~ /^[0-9]{4}\/[0-9][0-9]?$/;
 
     # verify published status
-    die "$record{Title}:  We don't know this published status [$record{PublishedStatus}]" unless $record{PublishingStatus} =~ /^(Published|Accepted)$/;
+    die "$record{Title}:  We don't know this published status [$record{PublishedStatus}]" unless $record{PublishingStatus} =~ /^(Published|Accepted|Revision Requested)$/;
     # verify refereed
     Verify_Yes_No($record{Refereed}, "Refereed");
     Verify_Yes_No($record{OpenAccess}, "Open Access");
@@ -73,9 +73,10 @@ sub Output_Entry
     my %record = (@_);
     %record = Escape_XML_hash( %record );
 
-    if (defined($record{Note}) and $record{Note} ne "") {
-        $record{Journal} .= " ($record{Note})";
-    }
+    # # Uncomment this if you want to append impact factor to journal title
+    # if (defined($record{Note}) and $record{Note} ne "") {
+    #     $record{Journal} .= " ($record{Note})";
+    # }
 
 #    foreach my $k (sort keys %record) {
 #       print "$k-> $record{$k}\n"
