@@ -60,7 +60,10 @@ def conference_date(entry):
                     parts = entry[key].split('/')
                     return ("%s-%s-1" % (parts[0], parts[1]))
             if key == "year":
-                return "%s-01-01" % entry[key]
+                if 'month' in entry:
+                    return "%s-%s-1" % (entry[key], entry['month'])
+                else:
+                    return "%s-01-01" % entry[key]
             return entry[key]
     raise Exception("No Conf date in entry")
 
@@ -111,6 +114,7 @@ def get_note(pub):
         return pub['notes']
     if 'rate' in pub:
         return pub['rate']
+    
     return None
 
 def process(pubs):
@@ -139,7 +143,7 @@ def process(pubs):
                 opub['PublishedIn'] = " " # pub['venue'][0:99]
             note = get_note(pub)
             if note:
-                opub['Note'] = get_note(pub)
+                opub['Note'] = note
             opub['PublishingStatus']=pub.get('publishingstatus',"Published")
             opub['Refereed'] = pub.get("refereed","Yes")
             opub['Authors'] = bold_authors(pub)
@@ -165,6 +169,10 @@ def process(pubs):
                 if 'issue' in pub:
                     pub['issue'] = str(pub['issue'])
                     opub['Issue'] = pub['issue']
+                if 'volume' in pub:
+                    opub['Volume'] = pub['volume']
+                if 'number' in pub:
+                    opub['Issue'] = pub['number']
                 
             if 'pages' in pub:
                 pub['pages'] = str(pub['pages'])

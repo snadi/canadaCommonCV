@@ -74,8 +74,9 @@ sub Output_Entry
     %record = Escape_XML_hash( %record );
 
     if (defined($record{Note}) and $record{Note} ne "") {
-        $record{Journal} .= " ($record{Note})"; 
-    } 
+        $record{Journal} .= " ($record{Note})";
+    }
+
 #    foreach my $k (sort keys %record) {
 #       print "$k-> $record{$k}\n"
 #    }

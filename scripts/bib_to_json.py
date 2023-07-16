@@ -50,7 +50,7 @@ def main():
         jsonentry['authors'] = process_authors(paper.persons['author'])
 
         #keys with same name in bib and json format
-        for key in ['title', 'year', 'publisher', 'doi', 'city', 'country', 'volume']:
+        for key in ['title', 'year', 'publisher', 'doi', 'city', 'country', 'volume', 'number']:
             if key in paper.fields:
                 jsonentry[key] = paper.fields[key]
                 
@@ -60,8 +60,12 @@ def main():
         if 'addendum' in paper.fields:
             jsonentry['notes'] = process_addendum(paper.fields['addendum'])
         
-
-        jsonentry['PublishingStatus'] = 'Published' # assumption is entries appearing in bib file are published
+        if 'status' in paper.fields:
+            jsonentry['PublishingStatus'] = paper.fields['status']
+        else:
+            # assumption is entries appearing in bib file are published, 
+            # unless another explicit status is given
+            jsonentry['PublishingStatus'] = 'Published' 
 
         if paper.type == 'article': # journal specific values
             jsonentry['venue'] = paper.fields['journal']
