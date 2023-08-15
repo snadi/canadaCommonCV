@@ -33,9 +33,11 @@ foreach my $k (sort keys %papers){
 sub Load_Refs
 {
     my ($filename) = @_;
+    print "Loading [$filename]\n";
 
     open(IN, "<$filename") or die "Unable to open [$filename]";
 
+    
 
     while (<IN>) {
         chomp;
@@ -91,7 +93,7 @@ sub Process_Record
     }
 #    print "$refs{$ti} => $record{Title}\n";
     $papers{$refs{$ti}} = $record{dmgKey};
-    if (not defined($refs{$ti})) {
+    if (not defined($refs{$ti}) and $record{year} > 2016) {
         die "record does not contain title [$record{dmgKey}];[$record{Title}]";
     }
 

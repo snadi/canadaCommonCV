@@ -46,9 +46,11 @@ def main():
     jsondata['journals'] = []
     jsondata['conferences'] = []
 
-    for entry in bib_data.entries.keys():
-        paper = bib_data.entries[entry]
+    for key in bib_data.entries.keys():
+        paper = bib_data.entries[key]
         jsonentry = {}
+
+        jsonentry["id"] = key
         
         jsonentry['authors_tex'] = process_authors(paper.persons['author'], tex=True)
         jsonentry['authors'] = process_authors(paper.persons['author'])

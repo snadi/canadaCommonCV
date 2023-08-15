@@ -70,6 +70,8 @@ sub Output_Entry {
     $record{Authors} =~ s@</b>@@g;
     $record{Authors} =~ s@, @ and @g; # comma becomes an and
     
+    # print to record key to debug
+    print "$record{dmgKey}\n";
 
     my $indent = "    ";
     print "\@InProceedings{$record{dmgKey},\n";
