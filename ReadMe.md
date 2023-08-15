@@ -76,90 +76,6 @@ instead, concentrate on just uploading XML files.
     -   Select journals or conferences appropriately
 -   Verify the data was read by browsing the current ccv.
 
-# Create a bibliography for latex that can reference your CCV
-
-In the directory latexCrossRef you will find a way to create an Latex
-input file that you can use to reference your CCV using standard bibtex
-citations.
-
-For example, these are some of my publications in the ccv:
-
-[]{.image .placeholder original-image-src="./j.png"
-original-image-title=""}
-
-[]{.image .placeholder original-image-src="./c.png"
-original-image-title=""}
-
-And this is how I refer to them in the proposal:
-
-``` LaTeX
-...
-difficulties of tracing contributions in email and version control systems \cite{dmg2015contMining,dmg2014esemMailCommits}.
-We have empirically observed how distributions perform integration~\cite{dmg2014eseDebianInt}, and how software
-ecosystems manage their contributions and releases~\cite{dmg2015emseCommuContrib,dmg2013csmrR}
-We identified code reviews as a crucial tool for quality control in FOSS projects, investigated the
-manner in which they are performed via email, and found them to be as
-effective as those in commercial software~\cite{dmg2014tosemReviews,dmg2012ieeeReviews}. We have also explored the
-challenges of adopting and upgrading FOSS libraries~\cite{dmg2015icsmeEralib,dmg2014vissoftLib}.
-...
-```
-
-and this is how it appears:
-
-[]{.image .placeholder original-image-src="./la.png"
-original-image-title=""}
-
-## How it works
-
--   The **input** file is your CCV (name it ccv-nserc.pdf) and the
-    bibtex files created from your conference and journal sources (see
-    above)
--   The important file to generate is contributionsInclude.tex
--   Simply follow the Makefile.
--   It requires the .bib files to be generated before (see symlinks for
-    these)
--   Two files are created.
-    -   confsListBib.pdf
-    -   journalsListBib.pdf
-
-## Steps
-
--   make sure bib files you generate from your conf and journal files
-    are up-to-date
--   download a recent version of the CCV (pdf) that matches those files
--   run make
--   if no errors, verify the files: confsListBib.pdf and
-    journalsListBib.pdf
-    -   Verify the order of the entries.
-    -   Every row in the first section contains two numbers:
-    -   The left hand side is the order in the CCV, the right hand
-        number should match (it used a bibtex entry).
-    -   If they don\'t, something is wrong.
--   result: two files
-    -   confsListBib.bbl
-    -   journalsListBib.bbl
-
-## How to use
-
-In your proposal use, instead of a bibliography, include
-contributionsInclude.tex. Use the field *dmgKey* in the txt entries of
-your papers to refer to them in your proposal. See below: If you don\'t
-like the format, modify the files in includes. contributionsInclude.tex
-is created by concatenating the files in [*includes*]{.spurious-link
-target="includes"}.
-
-``` LaTeX
-...
-
-Recently, we empirically studied how GitHub is helping commercial software
-development~\cite{dmg2015icseGithub}. 
-
-...
-\input{contributionsInclude}
-
-```
-
-
 # Intermediate Format Used
 
 The scripts automatically convert the input bib file to various intermediate formats before creating the final XML format CCV accepts. First, the bib files are converted to a json format, which is then converted to Daniel German's input txt format below. If you would like to see these intermediate files, you can remove the `rmtmpfiles` dependency from the `default` target in the Makefile.
@@ -209,4 +125,67 @@ And this is an example of a conference:
 One line per field, and separate records with an empty line. Some HTML
 is allowed in the CCV, but not everywhere.
 
+
+
+
+# Create a bibliography for latex that can reference your CCV
+
+In the directory latexCrossRef you will find a way to create an Latex
+bibliography input file that you can use to reference your CCV using standard bibtex
+citations.
+
+For example, these are some of my publications in the ccv:
+
+[]{.image .placeholder original-image-src="./images/j.png"
+original-image-title=""}
+
+[]{.image .placeholder original-image-src="./sample/c.png"
+original-image-title=""}
+
+And this is how I refer to them in the proposal:
+
+``` LaTeX
+...
+difficulties of tracing contributions in email and version control systems \cite{dmg2015contMining,dmg2014esemMailCommits}.
+We have empirically observed how distributions perform integration~\cite{dmg2014eseDebianInt}, and how software
+ecosystems manage their contributions and releases~\cite{dmg2015emseCommuContrib,dmg2013csmrR}
+We identified code reviews as a crucial tool for quality control in FOSS projects, investigated the
+manner in which they are performed via email, and found them to be as
+effective as those in commercial software~\cite{dmg2014tosemReviews,dmg2012ieeeReviews}. We have also explored the
+challenges of adopting and upgrading FOSS libraries~\cite{dmg2015icsmeEralib,dmg2014vissoftLib}.
+...
+```
+
+and this is how it appears:
+
+[]{.image .placeholder original-image-src="./images/la.png"
+original-image-title=""}
+
+## How it works
+
+-   The **input** file is your CCV (name it ccv-nserc.pdf) and the
+    bib file that contains all your publications (the same one you used to generate your CCV above)
+-   Place your downloaded ccv-nserc.pdf file in `input/` -- or change the location but update the Makefile accordingly
+-   The important file to generate is `ccv_references.aux``
+-  Run the following. Note that the input bib file is just the name of the bib file found in `input/`
+```
+cd latexCrossRef
+make INPUT_BIB=<your input bib file>
+```
+
+## Steps
+
+-   download a recent version of the CCV (pdf) since any updates to your CCV will change the references numbers
+-   run make
+-   if no errors, verify that the generated `ccvReferences.txt` in this directory matches the order of your CCV. Otherwise, something is wrong
+
+## How to use
+
+Copy the generated aux file to your main latex project directory. In your main tex file:
+
+```LaTeX
+\usepackage{xcite}
+\externalcitedocument{ccv_references}
+```
+then you can cite refernces from your own work as usual. Note that these cited references will appear as `[C1, J3]` etc. in the text but WILL NOT appear again in the reference list of your proposal (which is the desired end result).
 
